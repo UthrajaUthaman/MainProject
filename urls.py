@@ -1,33 +1,23 @@
-from django.conf import settings
-from django.urls import path
-from django.conf.urls.static import static
-from . import views
-from .views import chatbot
+"""
+URL configuration for HomeSpiration project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path,include
 
 urlpatterns = [
-    path('',views.index,name='index'),
-    path('professional_home',views.professional_dashboard,name='professional_dashboard'),
-    path('login/',views.loginnew,name='login'),
-    #path('signup',views.register_normal_user,name='signup'),
-    path('signup/', views.register_normal_user, name='register_normal_user'),
-    path('register/professional/',views.register_professional,name='register_professional'),
-    path('about',views.about,name='about'),
-    path('logout/',views.logoutp,name='logout'),
-    path('submit-professional-type-services/', views.submit_professional_type_services, name='submit_professional_type_services'),
-    path('submit-professional-website-info/', views.submit_professional_website_info, name='submit_professional_website_info'),
-    path('submit-professional-final-details/', views.submit_professional_final_details, name='submit_professional_final_details'),
-    #path('addprojects',views.addprojects,name='addprojects'),
-    path('Design/', views.generate_image_from_txt, name='Design'),
-    path('chatbot/', chatbot, name='chatbot'),
-
-    path('add_project/', views.add_project, name='add_project'),
-    path('show-projects/', views.show_projects, name='show_projects'),
-    path('project-detail/<int:project_id>/', views.project_detail, name='project_detail'),
-    path('edit_professional_details/', views.edit_professional_details, name='edit_professional_details'),
-    
-
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+    path('admin/', admin.site.urls),
+    path('', include('my_app.urls')),
+]
